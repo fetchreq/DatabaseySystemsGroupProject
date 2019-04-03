@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Sign Up</title>
-    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="../static/main.css">
 </head>
 <body>
 <h1>Sign Up</h1>
 <div>
     <a href="/signIn">Back</a>
 </div>
-<form>
+<form method="post">
     First Name:<br>
     <input type="text" name="firstName" required><br>
     Last Name:<br>
@@ -22,8 +22,8 @@
     Confirm Password:<br>
     <input type="password" name="confirmPassword" required><br>
     Address:<br>
-    <input type="test" name="Address" required><br>
-    <input type="submit">
+    <input type="text" name="Address" required><br>
+    <input type="submit" value="Create Account" >
 </form>
 
 <p>This page will have input boxes that will create a user account</p>
