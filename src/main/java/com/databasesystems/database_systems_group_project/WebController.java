@@ -21,26 +21,30 @@ public class WebController {
    }
 
     @GetMapping("/signIn")
-    public String displaySignIn(){
+    public String displaySignIn(Model model) {
+        model.addAttribute("signIn", new User());
         return "signIn";
     }
     @PostMapping("/signIn")
-    public String postSingIn(@ModelAttribute SignIn signIn){
-       return "home";
+    public String postSingIn(@ModelAttribute User signIn) {
+        if (userService.userSignInValid(signIn)) {
+            return "redirect:home";
+        }
+        return "signIn";
     }
 
     @GetMapping("/signUp")
     public Model displaySignUpForm(Model model) {
         //ModelAndView mv =  new ModelAndView("signUp");
-        model.addAttribute("signUp", new NewSignUp());
+        model.addAttribute("signUp", new User());
         return model;
     }
 
     @PostMapping("/signUp")
-    public String postSignUpForm(@ModelAttribute NewSignUp newUser) {
-        System.out.println(newUser.getUsername());
+    public String postSignUpForm(@ModelAttribute User newUser) {
 
-        if (userService.userValid()) {
+
+        if (userService.userSignUpValid(newUser)) {
             userService.createUser(newUser);
             return "redirect:home";
         }

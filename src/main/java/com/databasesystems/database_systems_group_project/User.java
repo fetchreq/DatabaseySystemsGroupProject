@@ -7,7 +7,7 @@ import java.sql.Date;
 
 @Entity
 @Table(name = "passenger")
-public class NewSignUp {
+public class User {
     private String username;
     private String password;
     private String email;
@@ -20,10 +20,10 @@ public class NewSignUp {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int passengerID;
 
-    public NewSignUp() {
+    public User() {
     }
 
-    public NewSignUp(String username, String password, String email, Date DOB, String firstName, String lastName) {
+    public User(String username, String password, String email, Date DOB, String firstName, String lastName) {
         this.username = username;
         this.password = password;
         this.email = email;

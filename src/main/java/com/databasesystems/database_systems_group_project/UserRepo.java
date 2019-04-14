@@ -10,10 +10,10 @@ import java.util.List;
 
 
 @Repository
-public interface UserRepo extends JpaRepository<NewSignUp, Integer> {
+public interface UserRepo extends JpaRepository<User, Integer> {
 
-    @Query(value = "SELECT passengerID FROM NewSignUp WHERE username = :username")
-    List<NewSignUp> findUser(@Param("username") String username);
+    @Query(value = "SELECT passengerID FROM User WHERE username = :username")
+    List findUser(@Param("username") String username);
 
 
 }
