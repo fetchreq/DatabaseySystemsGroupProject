@@ -1,4 +1,6 @@
 package com.databasesystems.database_systems_group_project;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class WebController {
-
+    @Autowired
+    private UserService userService;
 
    @RequestMapping({"/", "/home"})
     public String display(){
@@ -27,18 +30,22 @@ public class WebController {
     }
 
     @GetMapping("/signUp")
-    public String displaySignUpForm(Model model){
+    public Model displaySignUpForm(Model model) {
+        //ModelAndView mv =  new ModelAndView("signUp");
         model.addAttribute("signUp", new NewSignUp());
-        return "signUp";
+        return model;
     }
 
     @PostMapping("/signUp")
-    public String postSignUpForm(@ModelAttribute NewSignUp newSignUp){
-            if(newSignUp.findUserNum()){
-                return "signUp";
-            }
-           return "redirect:/home";
+    public String postSignUpForm(@ModelAttribute NewSignUp newUser) {
+        System.out.println(newUser.getUsername());
 
+        if (userService.userValid()) {
+            userService.createUser(newUser);
+            return "redirect:home";
+        }
+
+        return "signUp";
 
     }
 
