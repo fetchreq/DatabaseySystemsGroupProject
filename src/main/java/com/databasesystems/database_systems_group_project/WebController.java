@@ -8,15 +8,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
 
 
 @Controller
 public class WebController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private SearchService searchService;
 
    @RequestMapping({"/", "/home"})
-    public String display(){
+   public String display(Model model) {
+       //model.addAttribute("name","Ryan");
        return "home";
    }
 
@@ -35,7 +39,7 @@ public class WebController {
 
     @GetMapping("/signUp")
     public Model displaySignUpForm(Model model) {
-        //ModelAndView mv =  new ModelAndView("signUp");
+
         model.addAttribute("signUp", new User());
         return model;
     }
@@ -53,9 +57,20 @@ public class WebController {
 
     }
 
-    @RequestMapping("/search")
-    public String displaySearch(){
+    @GetMapping("/search")
+    public String getSearch(Model model) {
+        List<Search> searches = searchService.findFlights();
+
+        System.out.println("here");
+        model.addAttribute("flight", searches);
         return "search";
+
+    }
+
+    @PostMapping("/search")
+    public String postSearch(@ModelAttribute Search search) {
+        return "search";
+        // SearchService.findFlights(search);
     }
 
 }
