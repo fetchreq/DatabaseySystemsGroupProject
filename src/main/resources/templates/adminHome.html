@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <meta charset="UTF-8">
+    <title>Admin Home</title>
     <style>
         ul {
             list-style-type: none;
@@ -31,25 +33,18 @@
             background-color: lightsteelblue;
         }
     </style>
-    <meta charset="UTF-8">
-    <title>Home</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" href="../static/main.css">
 </head>
 <body>
 <div id="navbar">
     <ul>
         <li><a href="/home">Home</a></li>
-        <li><a href="/search">Search for Flights</a> </li>
-
+        <li><a href="/search">Search for Flights</a></li>
+        <li><a href="/addFlight">Add flight</a></li>
 
         <li th:if="${user.getFirstName() != null}" style="float:right"><a href="/logout"
                                                                           th:text="${user.getFirstName()}"></a>
         <li th:unless="${user.getFirstName() != null}" style="float:right"><a href="/signIn">Sign In</a></li>
     </ul>
 </div>
-<h1> Home</h1>
-
-<p>This page can have upcoming flights or something.</p>
 </body>
 </html>

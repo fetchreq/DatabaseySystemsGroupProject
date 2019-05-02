@@ -5,6 +5,53 @@
     <title>Sign In</title>
     <link rel="stylesheet" type="text/css" href="../static/main.css">
     <style>
+        #top, #bottom, #left, #right {
+            background: #303030;
+            position: fixed;
+        }
+
+        #left, #right {
+            top: 0;
+            bottom: 0;
+            width: 10%;
+        }
+
+        #left {
+            left: 0;
+        }
+
+        #right {
+            right: 0;
+        }
+
+        #top, #bottom {
+            left: 0;
+            right: 0;
+
+        }
+
+        #top {
+            top: 0;
+        }
+
+        #bottom {
+            bottom: 0;
+        }
+
+        .singIn {
+            border-style: groove;
+            border-color: darkgray;
+            background-color: darkgray;
+            padding: 10px;
+            position: absolute;
+            right: 20%;
+            left: 20%;
+            top: 30%;
+            width: 60%;
+            text-align: center;
+            font-size: 18px;
+
+        }
         ul {
             list-style-type: none;
             margin: 0;
@@ -31,25 +78,54 @@
         }
 
         body {
-            background-color: lightsteelblue;
+            background-color: lightgray;
         }
+
+        h1.pageTitle {
+            position: absolute;
+            left: 15%;
+        }
+
+        div.backButton {
+            position: absolute;
+            left: 15%;
+        }
+
+        a.button {
+            position: absolute;
+            -webkit-appearance: button;
+            -moz-appearance: button;
+            appearance: button;
+            padding: 2px 4px;
+            text-decoration: none;
+            color: initial;
+            top: 60px;
+        }
+
     </style>
 </head>
 <body>
-<h1>Sign In</h1>
-<div>
-    <a href="/home">Back</a>
+<div id="left"></div>
+<div id="right"></div>
+<div id="top"></div>
+<div id="bottom"></div>
+<h1 class="pageTitle">Sign In</h1>
+<div class="backButton">
+    <a href="/home" class="button">Back</a>
+
 </div>
-<form method="post">
+
+<form class="singIn" method="post">
     Username:<br>
     <input type="text" name="username" required><br>
     Password:<br>
     <input type="password" name="password" required><br>
     <input type="submit">
     <a href="/signUp">Not a member? Click here to sign up</a>
+    <br>
+    <a href="/employeeSignIn">Employee Sign In</a>
 </form>
-<p>This page will need to have username and password input boxes and a button. When the user clicks the
-button they will be logged in. There will also be a sign up button that will have the user input their info to create
-an account.</p>
+
+
 </body>
 </html>

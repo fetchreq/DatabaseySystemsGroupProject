@@ -2,30 +2,37 @@ package com.databasesystems.database_systems_group_project;
 
 
 import javax.persistence.*;
-
+import java.sql.Date;
 
 
 @Entity
-@Table(name = "passenger")
-public class User {
+@Table(name = "employee")
+public class Employee {
     private String username;
     private String password;
     private String firstName;
     private String lastName;
-    private boolean isAdmin = false;
+    private Date hireDate;
+    private int salary;
+    private int departmentID;
+    private boolean isAdmin = true;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int passengerID;
+    private int employeeID;
 
-    public User() {
+    public Employee() {
     }
 
-    public User(String username, String password, String firstName, String lastName) {
+    public Employee(String username, String password, String firstName, String lastName, Date hireDate, int salary, int departmentID) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.hireDate = hireDate;
+        this.salary = salary;
+        this.departmentID = departmentID;
     }
 
     public boolean getIsAdmin() {
@@ -69,8 +76,35 @@ public class User {
     }
 
     @Column
+    public Date gethireDate() {
+        return hireDate;
+    }
+
+    public void setHireDate(Date hireDate) {
+        this.hireDate = hireDate;
+    }
+
+    @Column
+    public int getSalary() {
+        return this.salary;
+    }
+
+    public void setSalary(int salary) {
+        this.salary = salary;
+    }
+
+    @Column
+    public int getDepartmentID() {
+        return this.departmentID;
+    }
+
+    public void setDepartmentID(int departmentID) {
+        this.departmentID = departmentID;
+    }
+
+    @Column
     public int getPassengerID() {
-        return passengerID;
+        return employeeID;
     }
 
 

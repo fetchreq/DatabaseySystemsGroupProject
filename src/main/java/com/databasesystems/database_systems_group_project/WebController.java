@@ -13,25 +13,48 @@ import java.util.List;
 
 @Controller
 public class WebController {
+
+    private int userNum = 0;
+    private User user;
+    private int employeeNum = 0;
+    private Employee employee;
     @Autowired
     private UserService userService;
     @Autowired
     private SearchService searchService;
+    @Autowired
+    private EmployeeService employeeService;
 
    @RequestMapping({"/", "/home"})
    public String display(Model model) {
-       //model.addAttribute("name","Ryan");
+       System.out.println("ENum " + employeeNum);
+       System.out.println("UNum " + userNum);
+       if (userNum != 0) {
+
+           user = userService.getUser(userNum);
+           model.addAttribute("user", user);
+           return "home";
+       } else if (employeeNum != 0) {
+
+           employee = employeeService.getEmployee(employeeNum);
+           model.addAttribute("user", employee);
+           return "adminHome";
+       }
+       model.addAttribute("user", new User());
        return "home";
    }
 
     @GetMapping("/signIn")
     public String displaySignIn(Model model) {
-        model.addAttribute("signIn", new User());
+        // model.addAttribute("signIn", new User());
         return "signIn";
     }
     @PostMapping("/signIn")
     public String postSingIn(@ModelAttribute User signIn) {
-        if (userService.userSignInValid(signIn)) {
+
+        if (!userService.userSignInValid(signIn).isEmpty()) {
+
+            userNum = (Integer) userService.userSignInValid(signIn).get(0);
             return "redirect:home";
         }
         return "signIn";
@@ -63,6 +86,7 @@ public class WebController {
 
         System.out.println("here");
         model.addAttribute("flight", searches);
+        model.addAttribute("user", user);
         return "search";
 
     }
@@ -71,6 +95,32 @@ public class WebController {
     public String postSearch(@ModelAttribute Search search) {
         return "search";
         // SearchService.findFlights(search);
+    }
+
+    @GetMapping("/logout")
+    public String getLogout() {
+        user = null;
+        userNum = 0;
+        employee = null;
+        employeeNum = 0;
+        return "redirect:home";
+    }
+
+    @GetMapping("/employeeSignIn")
+    public String getEmployee() {
+
+        return "employeeSignIn";
+
+    }
+
+    @PostMapping("/employeeSignIn")
+    public String postPostEmployee(@ModelAttribute Employee employee) {
+        if (!employeeService.employeeSignInValid(employee).isEmpty()) {
+            employeeNum = (Integer) employeeService.employeeSignInValid(employee).get(0);
+            return "redirect:home";
+        }
+        return "employeeSignIn";
+
     }
 
 }
